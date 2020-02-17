@@ -11,15 +11,9 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 const Root = () => (
     <BrowserRouter>
         <Switch>                                 
-            <Route exact path='/'>
-                <Connexion />
-            </Route> 
-            <Route path='/pseudo/:pseudo'>
-                <App />
-            </Route>  
-            <Route>
-                <NotFound />
-            </Route>  
+            <Route exact path='/' component={Connexion} />
+            <Route path='/pseudo/:pseudo' component={App} />
+            <Route component={NotFound} />  
         </Switch>
     </BrowserRouter>
 )

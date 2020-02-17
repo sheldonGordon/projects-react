@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './App.css'
-import { useParams } from "react-router-dom";
 
 import Formulaire from './components/Formulaire'
 import Message from './components/Message'
@@ -12,19 +11,31 @@ class App extends Component {
   }
 
   addMessage = message => {
-    const messages = { ...this.state.messages}
-    messages[`message-${Date.now}`] = message
+    const messages = { ... this.state.messages}
+    messages[`message-${Date.now()}`] = message
     this.setState({messages})
   }
+
   render () {
+    const messages = Object
+      .keys(this.state.messages)
+      .map(key =>(
+        <Message 
+          key={key}
+          pseudo={this.state.messages[key].pseudo}
+          message={this.state.messages[key].message} />
+      ))
     return (
       <div className='box'>
         <div className='messages'>
-          <Message />
-          <Message />
-          <Message />
+          <div>
+            {messages}            
+          </div>
         </div>
-        <Formulaire addMessage={this.addMessage}/>
+        <Formulaire 
+        length={140}
+        pseudo={this.state.pseudo}
+        addMessage={this.addMessage}/>
       </div>
     )
   }
