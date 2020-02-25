@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
 import AjouterRecette from './AjouterRecette'
+import AdminForm from './AdminForm'
 
 class Admin extends Component {
-  render () {
+
+  render () {    
+    const { recettes, chargerExemple, ajouterRecette, majRecette, supprimerRecette } = this.props
+
     return (
       <div className='card'>
-        <AjouterRecette AjouterRecette={this.props.AjouterRecette} />
+        <AjouterRecette ajouterRecette={ajouterRecette} />
+        {
+          Object.keys(recettes)
+            .map(key => <AdminForm
+              key={key}
+              id={key}
+              majRecette={majRecette}
+              recette={recettes[key]} 
+              supprimerRecette={supprimerRecette}/>)
+        }
         <footer>
-          <button onClick={this.props.chargerExemple}>Remplir</button>
+          <button onClick={chargerExemple}>Remplir</button>
         </footer>
       </div>
     )
