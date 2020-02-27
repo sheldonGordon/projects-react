@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Redirect } from 'react-router-dom'
+
+import withPlaceholder from '../hoc/withPlaceHolder'
 
 class Connexion extends Component {
   state = {
@@ -23,22 +25,26 @@ class Connexion extends Component {
     }
 
     return (
-      <div className='connexionBox'>
-        <form className='connexion' onSubmit={this.goToApp} >
-          <h1>Ma Boîte à Recettes</h1>
-          <input
-            type='text'
-            value={this.state.pseudo}
-            onChange={this.handleChange}
-            placeholder='Nom du Chef'
-            pattern='[A-Za-z-]{1,}'
-            required />
-          <button type='submit'>GO</button>
-          <p>Pas de caractères spéciaux.</p>
-        </form>
-      </div>
+      <Fragment>
+        <div className='connexionBox'>
+          <form className='connexion' onSubmit={this.goToApp} >
+            <h1>Ma Boîte à Recettes</h1>
+            <input
+              type='text'
+              value={this.state.pseudo}
+              onChange={this.handleChange}
+              placeholder={this.props.placeholder}
+              pattern='[A-Za-z-]{1,}'
+              required />
+            <button type='submit'>GO</button>
+          </form>
+        </div>
+        <p>Pas de caractères spéciaux.</p>
+      </Fragment>
     )
   }
 }
 
-export default Connexion
+const WrappedComponent = withPlaceholder(Connexion)
+
+export default WrappedComponent
